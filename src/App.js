@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import Header from "./Header";
-import Cards from "./Cards"
+import Cards from "./Cards";
+import Signup from "./Signup";
 import {
   BrowserRouter,
   Routes,
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
       <Cards />
@@ -44,6 +46,14 @@ function Profile() {
   return (
     <div className="profile">
       <h1>This is Profile!</h1>
+    </div>
+  );
+}
+
+function SignUp() {
+  return (
+    <div className="signup">
+      <h1>This is SignUp!</h1>
     </div>
   );
 }

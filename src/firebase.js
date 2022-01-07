@@ -1,6 +1,7 @@
 // import { initializeApp } from "firebase/app";
 // import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import firebase from "firebase";
+import "firebase/auth"
 
 const firebaseConfig = {
   apiKey: "AIzaSyBUI7fsetDQOeOZv1zwbO0-qoHvQLkhh5M",
@@ -17,6 +18,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const database = app.firestore();
 
+export const auth = app.auth();
 export default database;
 
 // async function getDogs(database) {
