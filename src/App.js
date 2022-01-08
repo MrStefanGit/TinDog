@@ -3,11 +3,14 @@ import './App.css';
 import Header from "./Header";
 import Cards from "./Cards";
 import Signup from "./Signup";
+import home from "./Home"
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
+import { Container } from 'react-bootstrap';
+
 
 function App() {
   return (
@@ -15,7 +18,7 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" component={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Signup />} />
@@ -27,12 +30,8 @@ function App() {
 }
 
 function Home() {
-  return (
-    <div className="home">
-      
-    </div>
-  );
-}
+  return <Home />;
+  }
 
 function Chat() {
   return (
@@ -50,12 +49,14 @@ function Profile() {
   );
 }
 
-function SignUp() {
+function Signup() {
   return (
-    <div className="signup">
-      <h1>This is SignUp!</h1>
-    </div>
-  );
+    <Container className='d-flex align-items-center' style={{minHeight: "100vh"}}>
+<div className='w-100' style={{maxWidth: '400px'}}>
+<Signup />
+</div>
+  </Container>
+    )
 }
 
 export default App;
