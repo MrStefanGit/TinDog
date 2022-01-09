@@ -1,5 +1,3 @@
-// import { initializeApp } from "firebase/app";
-// import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import firebase from "firebase";
 
 const firebaseConfig = {
@@ -11,21 +9,79 @@ const firebaseConfig = {
   appId: "1:103392802887:web:aa35974d6762389147d962"
 };
 
-// const app = initializeApp(firebaseConfig);
-// export default app;
-
 const app = firebase.initializeApp(firebaseConfig);
+const auth = app.auth();
 const database = app.firestore();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+const signInWithGoogle = async () => {
+  try {
+    const res = await auth.signInWithPopup(googleProvider);
+    const user = res.user;
+    const query = await database
+      .collection("users")
+      .where("uid", "==", user.uid)
+      .get();
+    if (query.docs.length === 0) {
+      await database.collection("users").add({
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "google",
+        email: user.email,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const signInWithEmailAndPassword = async (email, password) => {
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await auth.createUserWithEmailAndPassword(email, password);
+    const user = res.user;
+    await database.collection("users").add({
+      uid: user.uid,
+      name,
+      authProvider: "local",
+      email,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const sendPasswordResetEmail = async (email) => {
+  try {
+    await auth.sendPasswordResetEmail(email);
+    alert("Password reset link sent!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const logout = () => {
+  auth.signOut();
+};
 export default database;
 
-// async function getDogs(database) {
-//   const dogsCol = collection(database, 'dogs');
-//   const dogSnapshot = await getDocs(dogsCol);
-//   const dogList = dogSnapshot.docs.map(doc => doc.data());
-//   return dogList
-// }
-
-// const dogData = getDogs(database)
-
-// export default dogData;
+//marlanie
+export {
+  auth,
+  signInWithGoogle,
+  signInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  sendPasswordResetEmail,
+  logout,
+};
