@@ -36,3 +36,7 @@
   .register div {
     margin-top: 7px;
   }
+ .textlabel {
+   font-size: 20px;
+   margin-bottom: 5px;
+ }

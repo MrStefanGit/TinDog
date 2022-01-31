@@ -12,6 +12,7 @@ import Landing from "./Landing"
 import Matching from './Matching';
 import Chat from "./Chat"
 import Profile from './Profile';
+import UpdateProfile from './UpdateProfile';
 
 function App() {
   return (
@@ -22,9 +23,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/matching" element={<Matching />} />
-          <Route path="/landing" element={<Landing />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/updateProfile" element={<UpdateProfile />} />
         </Routes>
       </BrowserRouter>
     </div>

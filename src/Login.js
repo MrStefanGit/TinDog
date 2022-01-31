@@ -19,8 +19,7 @@ function Login() {
       }, [user, loading]);
 
     return (
-        <div className="Login">
-            <h1>ios login</h1>
+        <div className="login">
             <div className="login__container">
                 <input
                     type="text"

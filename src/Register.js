@@ -14,10 +14,12 @@ function Register() {
     const [name, setName] = useState("");
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
+    const [breed, setBreed] = useState("");
+    const [age, setAge] = useState("");
 
     const register = () => {
         if (!name) alert("Please enter name");
-        registerWithEmailAndPassword(name, email, password);
+        registerWithEmailAndPassword(name, email, password, breed, age);
     };
 
     useEffect(() => {
@@ -48,6 +50,20 @@ function Register() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
+                />
+                <input
+                    type="text"
+                    className="register__textBox"
+                    value={breed}
+                    onChange={(e) => setBreed(e.target.value)}
+                    placeholder="Breed"
+                />
+                <input
+                    type="text"
+                    className="register__textBox"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    placeholder="Age"
                 />
                 <button className="register__btn" onClick={register}>
                 Register
